@@ -1529,9 +1529,13 @@ document.getElementById('sLock').addEventListener('click', function() {
   secretTaps++;
   if (secretTimer) clearTimeout(secretTimer);
   secretTimer = setTimeout(() => { secretTaps = 0; }, 2000);
-  if (secretTaps >= 5) {
+  if (secretTaps >= 100) {
     secretTaps = 0;
-    goToMap();
+    const msg = document.createElement('div');
+    msg.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#7d2a3c;color:white;padding:1.2rem 2rem;border-radius:20px;font-family:Playfair Display,serif;font-size:1rem;font-style:italic;z-index:9999;text-align:center;pointer-events:none;';
+    msg.innerHTML = '😂 bhai jai hu relationship me short cut use nai karta';
+    document.body.appendChild(msg);
+    setTimeout(() => { msg.remove(); document.getElementById('skipModal').style.display='flex'; document.getElementById('skipInput').value=''; document.getElementById('skipErr').style.display='none'; }, 2000);
   }
 });
 
@@ -1575,7 +1579,7 @@ function openSkip(){
   document.getElementById('skipModal').style.display='flex';
   document.getElementById('skipInput').value='';
   document.getElementById('skipErr').style.display='none';
-  setTimeout(()=>document.getElementById('skipInput').focus(),100);
+  if(document.getElementById('skipInput').value===SKIP_PW || document.getElementById('skipInput').value===SECRET_PW){
 }
 function closeSkip(){ document.getElementById('skipModal').style.display='none'; }
 function checkSkip(){
